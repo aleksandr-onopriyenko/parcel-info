@@ -1,0 +1,7 @@
+export { default as checked } from './checked.svg'
+export { default as unchecked } from './unchecked.svg'
+export { default as parcel } from './parcel.svg'
+export { default as status } from './status.svg'
+export { default as warehouse } from './warehouse.svg'
+export { default as emptyData } from './empty-data.svg'
+export { default as notFound } from './not-found.jpg'
