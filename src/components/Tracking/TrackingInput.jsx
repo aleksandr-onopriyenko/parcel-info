@@ -12,7 +12,7 @@ export const TrackingInput = ({ onSubmit, value, disabled, onChange, formik }) =
         fullWidth
         name="number"
         id="number"
-        value={value}
+        value={value.number}
         label="Номер посилки"
         size={width < 900 ? 'small' : 'height'}
         onChange={onChange}
