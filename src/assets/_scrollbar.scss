@@ -1,0 +1,22 @@
+$accent-color: #e63946;
+$red-start: rgba(230, 57, 70, 0.8);
+$red-end: rgba(255, 75, 87, 0.8);
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to top, $red-start, $red-end);
+  border-radius: 10px;
+  border: 2px solid #fff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(to top, $red-end, $red-start);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: $accent-color;
+}
