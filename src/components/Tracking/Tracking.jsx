@@ -14,10 +14,39 @@ import { TrackingWrapper } from './TrackingWrapper'
 import { TrackingHistory } from './TrackingHistory'
 import { TrackingStatusList } from './TrackingStatusList'
 
+const validationSchema = yup.object({
+  number: yup
+    .string('Введіть номер посилки')
+    .min(14, 'Мінімальна довжина 14 символів')
+    .required(`Поле обов'язкове для заповнення`)
+    .matches(/^[0-9]+$/, 'Поле вводу має містити цифри'),
+})
+
 export const Tracking = () => {
+  const [fetchTracking, { isLoading, data }] = useTrackingMutation()
   const [{ activeHistoryId, history }, setTracking] = useState({
     activeHistoryId: '',
     history: [],
+  })
+
+  const formik = useFormik({
+    initialValues: {
+      number: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: ({ number }) => {
+      const id = uuidv4()
+      setTracking((prev) => {
+        if (prev.history.find((historyNum) => historyNum.value === number)) return prev
+
+        fetchTracking(number)
+        return {
+          ...prev,
+          activeHistoryId: id,
+          history: [...prev.history, { value: number, id }],
+        }
+      })
+    },
   })
 
   useTrackingLocalStorage(history, setTracking)
@@ -29,7 +58,7 @@ export const Tracking = () => {
       activeHistoryId: id,
     }))
     if (num !== formik.values.number) {
-      // fetch data
+      fetchTracking(num)
     }
   }
 
