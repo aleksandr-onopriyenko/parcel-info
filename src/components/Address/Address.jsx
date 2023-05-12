@@ -1,14 +1,16 @@
 import React from 'react'
 
 import { LoaderMapLocation, MarkersHint, MapInput, Map } from './index'
+import { useAddressPlaces } from '@/hooks/useAddressPlaces'
 
 export const Address = () => {
+  const { fetchRequest, currentLocation, markerLocations, isLoading } = useAddressPlaces()
   return (
     <>
       <MarkersHint />
-      <MapInput onSubmit={() => {}} />
+      <MapInput onSubmit={fetchRequest} />
       {isLoading && <LoaderMapLocation />}
-      <Map markers={[]} center={{}} />
+      <Map markers={markerLocations} center={currentLocation} />
     </>
   )
 }
